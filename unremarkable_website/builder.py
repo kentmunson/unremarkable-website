@@ -83,9 +83,10 @@ def write_page(gcs_client, page_num, page_exts, page_template, selector_stub, se
 def build_website(artifact_info, gcs_client):
     '''Rebuild the entire static website in GCS using the provided templates.'''
     
-    pages = artifact_info.get('pages')
+    # get page info
     page_exts = artifact_info.get('page_exts')
 
+    # get templates
     with open('templates/page_template.txt','r') as f:
         page_template = f.read()
 

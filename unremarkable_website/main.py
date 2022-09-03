@@ -17,7 +17,7 @@ def main(event, context):
 
     if ready:
         build_website(artifact_info, gcs_client)
-        send_confirmation_email(request)
+        send_confirmation_email(event)
         return 'Website rebuilt!', 200
 
     else:
