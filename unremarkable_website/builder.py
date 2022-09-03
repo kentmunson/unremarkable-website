@@ -1,5 +1,7 @@
 import re
 
+from gcs_reader import PAGE_BUCKET
+
 WEBSITE_BUCKET = 'www.unremarkables.com'
 
 SELECTOR_STUB = '''<option value="page{current_page}.html" selected>Go to Page...</option>'''
@@ -12,6 +14,24 @@ def upload_blob_from_memory(gcs_client, bucket_name, contents, destination_blob_
     blob = bucket.blob(destination_blob_name)
 
     blob.upload_from_string(contents)
+
+
+def copy_blob(gcs_client, bucket_name, blob_name, destination_bucket_name, destination_blob_name):
+    '''Copies a blob from one bucket to another with a new name.'''
+
+    source_bucket = gcs_client.bucket(bucket_name)
+    source_blob = source_bucket.blob(blob_name)
+
+    destination_bucket = gcs_client.bucket(destination_bucket_name)
+
+    blob_copy = source_bucket.copy_blob(
+        source_blob, destination_bucket, destination_blob_name
+    )
+
+
+def copy_comic_page(gcs_client, page_key):
+    dest_key = 'pages/' + page_key
+    copy_blob(gcs_client, PAGE_BUCKET, page_key, WEBSITE_BUCKET, dest_key)
 
 
 def generate_selector(page_num, page_exts, selector_stub, selector_line):
@@ -82,6 +102,11 @@ def write_page(gcs_client, page_num, page_exts, page_template, selector_stub, se
 
 def build_website(artifact_info, gcs_client):
     '''Rebuild the entire static website in GCS using the provided templates.'''
+
+    # first, copy images
+    pages = artifact_info.get('pages')
+    for p in pages:
+        copy_comic_page(gcs_client, p)
     
     # get page info
     page_exts = artifact_info.get('page_exts')
