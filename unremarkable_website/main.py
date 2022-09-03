@@ -4,9 +4,12 @@ from builder import build_website
 from email_funcs import send_confirmation_email, send_error_email
 from gcs_reader import check_artifact_readiness
 
-def main(request):
+def main(event, context):
     '''Process the GCS notification when a new page jpg is uploaded
         and rebuild the website.'''
+
+    new_file = event
+    print(f"Processing file: {new_file['name']}.")
 
     gcs_client = storage.Client()
 

@@ -75,7 +75,7 @@ def write_index(gcs_client, page_exts, index_template, selector_stub, selector_l
 
 def write_page(gcs_client, page_num, page_exts, page_template, selector_stub, selector_line):
     '''Write a single comic page html file to GCS.'''
-    page_guts = generate_page(page_num, page_exts, template, selector_stub, selector_line)
+    page_guts = generate_page(page_num, page_exts, page_template, selector_stub, selector_line)
     key = 'page{}.html'.format(page_num)
     upload_blob_from_memory(gcs_client, WEBSITE_BUCKET, page_guts, key)
 
@@ -84,7 +84,7 @@ def build_website(artifact_info, gcs_client):
     '''Rebuild the entire static website in GCS using the provided templates.'''
     
     pages = artifact_info.get('pages')
-    page_exts = artifact_info.get('pages_exts')
+    page_exts = artifact_info.get('page_exts')
 
     with open('templates/page_template.txt','r') as f:
         page_template = f.read()
