@@ -1,0 +1,19 @@
+<html>
+<!-- This page was automatically generated! Hopefully correctly! -->
+<head>
+<link rel="stylesheet" href="unremarkable_style.css">
+</head>
+
+<body>
+<img src="Logo_Cropped.jpg" alt="The Unremarkables!" class="center" style="width:40%">
+<ul class="nav">
+  <li><a href="page1.html">Start at the Beginning</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><select name="page_selector" onchange="location = this.value;">
+		{selector_guts}
+      </select></li>
+  <li><a href="{link_latest}">Latest</a></li>
+</ul>
+</head>
+</body>
+</html>

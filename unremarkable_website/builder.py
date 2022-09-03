@@ -89,7 +89,7 @@ def build_website(artifact_info, gcs_client):
     with open('templates/page_template.txt','r') as f:
         page_template = f.read()
 
-    with open('index_template.txt','r') as f:
+    with open('templates/index_template.txt','r') as f:
         index_template = f.read()
 
     # write pages

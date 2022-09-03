@@ -1,0 +1,24 @@
+<html>
+<!-- This page was automatically generated! Hopefully correctly! -->
+<head>
+<link rel="stylesheet" href="unremarkable_style.css">
+</head>
+
+<body>
+<a href="index.html">
+	<img src="Logo_small.jpg" alt="The Unremarkables!" class="center" style="width:20%">
+</a>
+<ul class="nav">
+  <li><a href="{link_first}">First</a></li>
+  <li><a href="{link_previous}">Previous</a></li>
+  <li><select name="page_selector" onchange="location = this.value;">
+		{selector_guts}
+      </select></li>
+  <li><a href="{link_next}">Next</a></li>
+  <li><a href="{link_latest}">Latest</a></li>
+</ul>
+</head>
+
+<img src="pages/page{page_num}.{image_ext}" alt="The Unremarkables P{page_num}" class="center">
+</body>
+</html>
