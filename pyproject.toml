@@ -6,6 +6,7 @@ authors = ["munson587"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+google-cloud-storage = "^2.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
